@@ -22,6 +22,12 @@
       component: 'register'
     })
     .state({
+      name: 'login',
+      parent: 'app',
+      url: '/login',
+      component: 'login'
+    })
+    .state({
       name: 'notebook',
       parent: 'app',
       url: '/notebook',

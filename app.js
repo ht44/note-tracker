@@ -13,6 +13,7 @@ const express = require('express');
 const app = express();
 
 const authRouter = require('./server/api/auth');
+const notesRouter = require('./server/api/notes');
 
 if (env === 'development') {
   app.use(morgan('dev'));
@@ -32,6 +33,7 @@ app.use(session({
 }));
 
 app.use((req, res, next) => {
+  console.log('id: ', req.session.userId);
   res.locals.currentUser = req.session.userId;
   next();
 });
@@ -42,6 +44,8 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(express.static(path.join(__dirname, 'client')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
 
+
+app.use('/api/notebook', notesRouter);
 app.use('/api', authRouter);
 
 app.get('*', (req, res) => {
@@ -56,7 +60,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
-  res.send(err.message);
+  res.json(err.message);
 });
 
 app.listen(port, () => {

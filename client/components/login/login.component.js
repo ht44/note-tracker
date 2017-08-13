@@ -1,7 +1,7 @@
 (function() {
   'use strict';
-  angular.module('app').component('register', {
-    templateUrl: 'components/register/register.template.html',
+  angular.module('app').component('login', {
+    templateUrl: 'components/login/login.template.html',
     controller: controller
   });
 
@@ -10,17 +10,19 @@
     this.attempt = () => {
       $http({
         method: 'POST',
-        url: '/api/register',
+        url: '/api/login',
         data: this.user
       }).then(this.success, this.fail);
     }
-
+    
     this.success = (response) => {
       $state.go('notebook');
     }
+
     this.fail = (response) => {
       delete this.user;
       console.log(response);
     }
+
   }
 })();
