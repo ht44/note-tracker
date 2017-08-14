@@ -12,20 +12,17 @@
         method: 'POST',
         url: '/api/register',
         data: this.user
-      }).then(this.success, this.fail);
-    }
+      }).then(success => {
+        $window.localStorage['username'] = success.data.username;
+        $window.localStorage['userId'] = success.data.id;
+        $scope.$parent.$ctrl.authenticated = true;
+        $state.go('notebook');
+      }, failure => {
+        delete this.user;
+        $state.go('error', {message: failure});
+      });
+    };
 
-    this.success = (response) => {
-      $window.localStorage['username'] = response.data.username;
-      $window.localStorage['userId'] = response.data.id;
-      $scope.$parent.$ctrl.authenticated = true;
-      // $scope.$parent.$ctrl.id = response.data.id;
-      // $scope.$parent.$ctrl.username = response.data.username;
-      $state.go('notebook');
-    }
-    this.fail = (response) => {
-      delete this.user;
-      console.log(response);
-    }
   }
+
 })();

@@ -12,29 +12,27 @@
 
     this.$onInit = () => {
       this.authenticated = $window.localStorage['userId'];
-    }
+    };
 
     this.logout = () => {
       $http({
         method: 'GET',
         url: '/api/logout'
-      }).then(this.success, this.failure);
-    }
-
-    this.success = response => {
-      this.authenticated = false;
-      $window.localStorage['authenticated'] = false;
-      delete $window.localStorage['userId'];
-      delete $window.localStorage['username'];
-      $state.go('home', {}, {reload: true});
-    }
-
-    this.failure = response => {
-      $state.go('error', {message: response});
-    }
+      }).then(success => {
+        this.authenticated = false;
+        $window.localStorage['authenticated'] = false;
+        delete $window.localStorage['userId'];
+        delete $window.localStorage['username'];
+        $state.go('home', {}, {reload: true});
+      }, failure => {
+        $state.go('error', {message: failure});
+      });
+    };
 
     this.getAccount = () => {
       $state.go('users', {id: $window.localStorage['userId']});
-    }
+    };
+
   }
+
 })();

@@ -17,7 +17,6 @@
     }
 
     this.editNote = () => {
-      console.log($stateParams);
       $http({
         method: 'PUT',
         url: `/api/notebook/${this.note._id}`,
@@ -29,7 +28,7 @@
       }).then(success => {
         console.log(success);
       }, failure => {
-        console.log(failure);
+        $state.go('error', {message: failure});
       });
     }
 
@@ -42,7 +41,7 @@
         $scope.$parent.$ctrl.notes.splice(idx, 1);
         this.note = $scope.$parent.$ctrl.notes[0];
       }, failure => {
-        console.log(failure);
+        $state.go('error', {message: failure});
       });
     }
   }

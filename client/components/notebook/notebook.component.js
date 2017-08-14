@@ -17,12 +17,12 @@
       }, failure => {
         $state.go('error', {message: failure});
       });
-    }
+    };
 
     this.selectNote = (note) => {
       this.current = note;
       $state.go('editor', {id: note._id, note: this.current});
-    }
+    };
 
     this.createNote = () => {
       this.new.created = new Date().toISOString();
@@ -34,9 +34,9 @@
         this.notes.push(success.data.note);
         this.edit = success.data.note;
       }, failure => {
-        console.log(failure);
+        $state.go('error', {message: failure});
       });
-    }
+    };
 
   }
 

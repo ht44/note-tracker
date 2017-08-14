@@ -14,7 +14,6 @@
         url: '/api/init'
       }).then(success => {
         this.authenticated = true;
-        console.log(success);
       }, failure => {
         $state.go('error', {message: failure});
       })
@@ -50,7 +49,7 @@
           $state.go('error', {message: failure});
         });
       }, failure => {
-        console.log(failure);
+        $state.go('error', {message: failure});
       });
     }
   }
