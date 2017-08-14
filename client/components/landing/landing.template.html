@@ -1,4 +1,5 @@
 <div>
-  <h1>Welcome to the note app</h1>
-  <p>Make an account to track private notes</p>
+  <h1 ng-hide="$ctrl.username">Welcome to the note app</h1>
+  <p ng-hide="$ctrl.username">Make an account to track private notes</p>
+  <h1 ng-show="$ctrl.username">Welcome to the note app, {{$ctrl.username}}</h1>
 </div>

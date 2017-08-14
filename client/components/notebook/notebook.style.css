@@ -16,8 +16,3 @@
 .panel li {
   cursor: pointer;
 }
-
-/*.editor > form {
-  display: flex;
-  flex-flow: column wrap;
-}*/

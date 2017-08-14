@@ -5,21 +5,29 @@
     controller: controller
   });
 
-  function controller($http, $state, $scope, $stateParams) {
+  function controller($http, $state, $scope, $stateParams, $window) {
 
     this.$onInit = () => {
-      console.log('initted');
+      this.authenticated = false;
+      $http({
+        method: 'GET',
+        url: '/api/init'
+      }).then(success => {
+        this.authenticated = true;
+        console.log(success);
+      }, failure => {
+        $state.go('error', {message: failure});
+      })
     }
 
     this.submit = () => {
       $http({
         method: 'PUT',
-        url: `/api/users/${$stateParams.id}`,
+        url: `/api/users/${$window.localStorage['userId']}`,
         data: this.user
       }).then(success => {
-        $scope.$parent.$ctrl.username = success.data.user.username;
-        $scope.$parent.$ctrl.id = success.data.user._id;
-        $state.go('home');
+        $window.localStorage['username'] = success.data.user.username;
+        $state.go('home', {}, {reload: true});
       }, failure => {
         $state.go('error', {message: failure});
       });
@@ -35,7 +43,8 @@
           url: '/api/logout'
         }).then(success => {
           $scope.$parent.$ctrl.authenticated = false;
-          console.log($scope.$parent.$ctrl);
+          delete $Window.localStorage['userId'];
+          delete $Window.localStorage['username'];
           $state.go('home');
         }, failure => {
           $state.go('error', {message: failure});

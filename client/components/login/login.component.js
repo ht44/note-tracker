@@ -5,7 +5,7 @@
     controller: controller
   });
 
-  function controller($http, $state, $scope) {
+  function controller($http, $state, $scope, $window) {
 
     this.attempt = () => {
       $http({
@@ -16,9 +16,11 @@
     }
 
     this.success = (response) => {
+      $window.localStorage['userId'] = response.data.id;
+      $window.localStorage['username'] = response.data.username;
       $scope.$parent.$ctrl.authenticated = true;
-      $scope.$parent.$ctrl.id = response.data.id;
-      $scope.$parent.$ctrl.username = response.data.username;
+      // $scope.$parent.$ctrl.id = response.data.id;
+      // $scope.$parent.$ctrl.username = response.data.username;
       $state.go('notebook');
     }
 

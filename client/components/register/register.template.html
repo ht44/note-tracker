@@ -1,8 +1,7 @@
 <div class="register">
-  <form novalidate ng-submit="$ctrl.attempt()">
-    <input ng-model="$ctrl.user.username" placeholder="username" type="text">
-    <input ng-model="$ctrl.user.password" placeholder="password" type="password">
-    <input ng-model="$ctrl.user.confirm" placeholder="confirm password" type="password">
+  <form ng-submit="$ctrl.attempt()">
+    <input ng-model="$ctrl.user.username" placeholder="username" type="text" required>
+    <input ng-model="$ctrl.user.password" placeholder="password" type="password" required>
     <input type="submit">
   </form>
 </div>

@@ -8,7 +8,11 @@
     controller: controller
   });
 
-  function controller($http, $state, $scope) {
+  function controller($http, $state, $scope, $window) {
+
+    this.$onInit = () => {
+      this.authenticated = $window.localStorage['userId'];
+    }
 
     this.logout = () => {
       $http({
@@ -19,7 +23,10 @@
 
     this.success = response => {
       this.authenticated = false;
-      $state.go('home');
+      $window.localStorage['authenticated'] = false;
+      delete $window.localStorage['userId'];
+      delete $window.localStorage['username'];
+      $state.go('home', {}, {reload: true});
     }
 
     this.failure = response => {
@@ -27,7 +34,7 @@
     }
 
     this.getAccount = () => {
-      $state.go('users', {id: $scope.$parent.$ctrl.id});
+      $state.go('users', {id: $window.localStorage['userId']});
     }
   }
 })();

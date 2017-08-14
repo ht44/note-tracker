@@ -5,22 +5,18 @@
     controller: controller
   });
 
-  function controller($http, $state) {
+  function controller($http, $state, $window) {
 
     this.$onInit = () => {
       $http({
         method: 'GET',
         url: '/api/notebook'
-      }).then(this.success, this.failure);
-    }
-
-    this.success = (response) => {
-      this.authenticated = true;
-      this.notes = response.data.notes;
-    }
-
-    this.failure = (response) => {
-      $state.go('error', {message: response});
+      }).then(success => {
+        this.authenticated = true;
+        this.notes = success.data.notes;
+      }, failure => {
+        $state.go('error', {message: failure});
+      });
     }
 
     this.selectNote = (note) => {
@@ -40,12 +36,8 @@
       }, failure => {
         console.log(failure);
       });
-
     }
 
-    this.editNote = () => {
-      console.log(this.edit);
-    }
   }
 
 })();

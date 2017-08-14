@@ -31,10 +31,7 @@
       name: 'users',
       parent: 'app',
       url: '/users/:id',
-      component: 'account',
-      params: {
-        username: null
-      }
+      component: 'account'
     })
     .state({
       name: 'notebook',
