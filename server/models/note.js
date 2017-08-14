@@ -3,7 +3,9 @@ const mongoose = require('mongoose');
 
 const NoteSchema = mongoose.Schema({
   _author: {
-    type: Number
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    index: true
   },
   title: {
     type: String,
@@ -11,8 +13,7 @@ const NoteSchema = mongoose.Schema({
     trim: true
   },
   body: {
-    type: String,
-    required: true
+    type: String
   },
   date: {
     type: String,

@@ -1,7 +1,21 @@
 <div class="notebook">
-  <h1>notebook</h1>
-  <form action="/api/notebook">
-    <input type="text">
-    <textarea name="name" rows="8" cols="80"></textarea>
-  </form>
+
+  <div class="panel">
+    <form novalidate ng-submit="$ctrl.createNote()">
+      <input ng-model="$ctrl.new.title" placeholder="title" type="text">
+      <input type="submit" value="New Note">
+    </form>
+    <ul>
+      <li ng-repeat="note in $ctrl.notes">{{ note.title }}</li>
+    </ul>
+  </div>
+
+  <div class="editor">
+    <form novalidate ng-submit="$ctrl.editNote()">
+      <input ng-model="$ctrl.edit.title" placeholder="title"type="text">
+      <textarea ng-model="$ctrl.edit.body" placeholder="body"  rows="8" cols="80"></textarea>
+      <input type="submit" value="Edit Note">
+    </form>
+  </div>
+
 </div>
