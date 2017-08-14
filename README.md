@@ -6,4 +6,4 @@
 2. Change into root.
 3. Run 'npm install'.
 4. Run 'npm start'.
-5. Visit port 8000 in a browser.
+5. Visit localhost:8000 in a browser.
