@@ -35,4 +35,26 @@ router.post('/', (req, res, next) => {
   });
 });
 
+router.put('/:id', (req, res, next) => {
+  Note.findById(req.params.id, (err, note) => {
+    if (err) {
+      next(err);
+    } else {
+      if (req.body.title) {
+        note.title = req.body.title;
+      }
+      if (req.body.body) {
+        note.body = req.body.body;
+      }
+      note.save((err, updatedNote) => {
+        if (err) {
+          next(err);
+        } else {
+          res.json({note: updatedNote});
+        }
+      });
+    }
+  });
+});
+
 module.exports = router;

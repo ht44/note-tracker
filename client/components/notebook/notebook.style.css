@@ -5,6 +5,7 @@
 
 .panel {
   border: 1px solid black;
+  height: 400px;
 }
 
 .panel ul {
@@ -15,7 +16,7 @@
   cursor: pointer;
 }
 
-.editor > form {
+/*.editor > form {
   display: flex;
   flex-flow: column wrap;
-}
+}*/

@@ -5,11 +5,9 @@
     controller: controller
   });
 
-  function controller($http) {
-
+  function controller($http, $state) {
 
     this.$onInit = () => {
-      this.notes = [];
       $http({
         method: 'GET',
         url: '/api/notebook'
@@ -24,6 +22,11 @@
       console.log(response);
     }
 
+    this.selectNote = (note) => {
+      this.current = note;
+      $state.go('editor', {id: note._id, note: this.current});
+    }
+
     this.createNote = () => {
       this.new.date = new Date().toISOString();
 
@@ -31,11 +34,11 @@
         method: 'POST',
         url: '/api/notebook',
         data: this.new
-      }).then(response => {
-        this.notes.push(response.data.note);
-        console.log(response);
-      }, response => {
-        console.log(response);
+      }).then(success => {
+        this.notes.push(success.data.note);
+        this.edit = success.data.note;
+      }, failure => {
+        console.log(failure);
       });
 
     }

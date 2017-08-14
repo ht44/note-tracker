@@ -34,6 +34,15 @@
       component: 'notebook'
     })
     .state({
+      name: 'editor',
+      parent: 'notebook',
+      url: '/notebook/:id',
+      component: 'editor',
+      params: {
+        note: null
+      }
+    })
+    .state({
       name: 'home',
       parent: 'app',
       url: '/',
