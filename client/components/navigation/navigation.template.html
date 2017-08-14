@@ -1,9 +1,9 @@
 <nav class="navigation">
   <ul>
     <li><a ui-sref="home">Home</a></li>
-    <li><a ui-sref="notebook">My Notebook</a></li>
-    <li><a ui-sref="register">Register</a></li>
-    <li><a ui-sref="login">Login</a></li>
-    <li><a ng-click="$ctrl.logout()" href="">logout</a></li>
+    <li ng-show="$ctrl.authenticated"><a ui-sref="notebook">My Notebook</a></li>
+    <li ng-show="$ctrl.authenticated"><a ng-click="$ctrl.logout()" href="">Logout</a></li>
+    <li ng-hide="$ctrl.authenticated"><a ui-sref="register">Register</a></li>
+    <li ng-hide="$ctrl.authenticated"><a ui-sref="login">Login</a></li>
   </ul>
 </nav>

@@ -15,11 +15,12 @@
     }
 
     this.success = (response) => {
+      this.authenticated = true;
       this.notes = response.data.notes;
     }
 
     this.failure = (response) => {
-      console.log(response);
+      $state.go('error', {message: response});
     }
 
     this.selectNote = (note) => {
@@ -28,8 +29,7 @@
     }
 
     this.createNote = () => {
-      this.new.date = new Date().toISOString();
-
+      this.new.created = new Date().toISOString();
       $http({
         method: 'POST',
         url: '/api/notebook',

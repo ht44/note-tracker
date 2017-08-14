@@ -1,3 +1,7 @@
 .navigation {
-  
+  float: left;
+}
+
+.navigation li {
+  display: inline;
 }

@@ -2,18 +2,21 @@
 
 const User = require('../models/user');
 const Note = require('../models/note');
+const loginRequired = require('../middleware').loginRequired;
 const express = require('express');
 const router = express.Router();
+
+
 
 class NoteData {
   constructor(author, note) {
     this._author = author;
     this.title = note.title;
-    this.date = note.date;
+    this.created = note.created;
   }
 }
 
-router.get('/', (req, res, next) => {
+router.get('/', loginRequired, (req, res, next) => {
 
   Note.find({'_author': req.session.userId}).exec((error, notes) => {
     if (error) {
@@ -24,7 +27,7 @@ router.get('/', (req, res, next) => {
   });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', loginRequired, (req, res, next) => {
   const newNote = new NoteData(req.session.userId, req.body);
   Note.create(newNote, (error, note) => {
     if (error) {
@@ -35,7 +38,7 @@ router.post('/', (req, res, next) => {
   });
 });
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', loginRequired, (req, res, next) => {
   Note.findById(req.params.id, (err, note) => {
     if (err) {
       next(err);
@@ -53,6 +56,16 @@ router.put('/:id', (req, res, next) => {
           res.json({note: updatedNote});
         }
       });
+    }
+  });
+});
+
+router.delete('/:id', loginRequired, (req, res, next) => {
+  Note.findByIdAndRemove(req.params.id, (err, note) => {
+    if (err) {
+      next(err);
+    } else {
+      res.json({deleted: note._id});
     }
   });
 });

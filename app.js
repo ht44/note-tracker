@@ -12,8 +12,9 @@ const MongoStore = require('connect-mongo')(session);
 const express = require('express');
 const app = express();
 
+const initRouter = require('./server/api/init');
 const authRouter = require('./server/api/auth');
-const notesRouter = require('./server/api/notes');
+const notebookRouter = require('./server/api/notebook');
 
 if (env === 'development') {
   app.use(morgan('dev'));
@@ -44,8 +45,8 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(express.static(path.join(__dirname, 'client')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
 
-
-app.use('/api/notebook', notesRouter);
+app.use('/api/init', initRouter);
+app.use('/api/notebook', notebookRouter);
 app.use('/api', authRouter);
 
 app.get('*', (req, res) => {

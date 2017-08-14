@@ -5,7 +5,7 @@
     controller: controller
   });
 
-  function controller($http, $state) {
+  function controller($http, $state, $scope) {
 
     this.attempt = () => {
       $http({
@@ -14,8 +14,9 @@
         data: this.user
       }).then(this.success, this.fail);
     }
-    
+
     this.success = (response) => {
+      $scope.$parent.$ctrl.authenticated = true;
       $state.go('notebook');
     }
 

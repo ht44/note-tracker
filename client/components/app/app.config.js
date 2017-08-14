@@ -3,10 +3,10 @@
   angular.module('app').config(config);
 
   config.$inject = [
-    '$stateProvider', '$urlRouterProvider', '$locationProvider'
+    '$stateProvider', '$locationProvider'
   ];
 
-  function config($stateProvider, $urlRouterProvider, $locationProvider) {
+  function config($stateProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
 
     $stateProvider
@@ -36,7 +36,7 @@
     .state({
       name: 'editor',
       parent: 'notebook',
-      url: '/notebook/:id',
+      url: '/:id',
       component: 'editor',
       params: {
         note: null
@@ -47,6 +47,15 @@
       parent: 'app',
       url: '/',
       component: 'landing'
+    })
+    .state({
+      name: 'error',
+      parent: 'app',
+      url: '/',
+      component: 'error',
+      params: {
+        message: null
+      }
     })
 
   }
