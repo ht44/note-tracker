@@ -32,7 +32,7 @@
         data: this.new
       }).then(success => {
         this.notes.push(success.data.note);
-        this.edit = success.data.note;
+        delete this.new;
       }, failure => {
         $state.go('error', {message: failure});
       });

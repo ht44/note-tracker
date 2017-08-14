@@ -1,7 +1,8 @@
 <div ng-show="$ctrl.authenticated" class="account">
+  <h2>Type new or old username or password</h2>
   <form ng-submit="$ctrl.submit()">
     <input ng-model="$ctrl.user.username" placeholder="username" type="text" required>
-    <input ng-model="$ctrl.user.password" placeholder="old password" type="password" required>
+    <input ng-model="$ctrl.user.password" placeholder="password" type="password" required>
     <input type="submit">
   </form>
   <button ng-click="$ctrl.delete()">DELETE ACCOUNT</button>

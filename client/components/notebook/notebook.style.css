@@ -6,7 +6,7 @@
 
 .panel {
   border: 1px solid black;
-  height: 400px;
+  height: 407px;
 }
 
 .panel ul {
@@ -15,4 +15,8 @@
 
 .panel li {
   cursor: pointer;
+}
+
+.panel a {
+  text-decoration: none;
 }

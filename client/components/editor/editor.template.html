@@ -1,7 +1,7 @@
 <div class="editor">
   <form novalidate ng-submit="$ctrl.editNote()">
     <input ng-model="$ctrl.note.title" placeholder="title"type="text">
-    <textarea ng-model="$ctrl.note.body" placeholder="body"  rows="8" cols="80"></textarea>
+    <textarea ng-model="$ctrl.note.body" placeholder="body"  rows="21" cols="80"></textarea>
     <input type="submit" value="Save Changes">
   </form>
   <button ng-click="$ctrl.deleteNote()">DELETE NOTE</button>

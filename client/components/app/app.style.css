@@ -5,6 +5,7 @@ body {
 }
 
 .app {
+  margin: 10px;
   display: flex;
   flex-flow: column wrap;
   width: 100vw;

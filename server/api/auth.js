@@ -15,13 +15,12 @@ router.post('/register', (req, res, next) => {
   let newUser = new UserData(req.body);
   User.create(newUser, (error, user) => {
     if (error) {
-      const err = new Error()
+      const err = new Error('User already exists')
       err.status = 404;
       next(err);
     } else {
       req.session.userId = user._id;
       res.json({id: user._id, username: user.username});
-      // res.sendStatus(200);
     }
   });
 });
@@ -34,7 +33,6 @@ router.post('/login', (req, res, next) => {
     } else {
       req.session.userId = user._id;
       res.json({id: user._id, username: user.username});
-      // res.sendStatus(200);
     }
   });
 });
