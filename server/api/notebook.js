@@ -6,8 +6,6 @@ const loginRequired = require('../middleware').loginRequired;
 const express = require('express');
 const router = express.Router();
 
-
-
 class NoteData {
   constructor(author, note) {
     this._author = author;
@@ -49,6 +47,7 @@ router.put('/:id', loginRequired, (req, res, next) => {
       if (req.body.body) {
         note.body = req.body.body;
       }
+      note.edited = new Date().toISOString();
       note.save((err, updatedNote) => {
         if (err) {
           next(err);

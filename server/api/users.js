@@ -1,18 +1,30 @@
 'use strict';
 const User = require('../models/user');
+const loginRequired = require('../middleware').loginRequired;
 const express = require('express');
 const router = express.Router();
 
-router.get('/:id', (req, res, next) => {
-  console.log(req.params.id);
-})
+router.get('/:id', loginRequired, (req, res, next) => {
+  if (req.session &&
+      req.session.userId &&
+      req.session.userId === req.params.id) {
+    User.findById(req.session.userId, (error, user) => {
+      if (error || !user) {
+        next(error);
+      } else {
+        res.json({id: user._id, username: user.username});
+      }
+    });
+  } else {
+    res.sendStatus(403);
+  }
+});
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', loginRequired, (req, res, next) => {
   User.findById(req.params.id, (error, user) => {
     if (error) {
       next(error);
     } else {
-      console.log(req.body);
       if (req.body.username) {
         user.username = req.body.username;
       }
@@ -30,7 +42,7 @@ router.put('/:id', (req, res, next) => {
   });
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', loginRequired, (req, res, next) => {
   User.findByIdAndRemove(req.params.id, (error, user) => {
     if (error) {
       next(error);
