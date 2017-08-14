@@ -17,6 +17,8 @@
 
     this.success = (response) => {
       $scope.$parent.$ctrl.authenticated = true;
+      $scope.$parent.$ctrl.id = response.data.id;
+      $scope.$parent.$ctrl.username = response.data.username;
       $state.go('notebook');
     }
 

@@ -20,7 +20,8 @@ router.post('/register', (req, res, next) => {
       next(err);
     } else {
       req.session.userId = user._id;
-      res.sendStatus(200);
+      res.json({id: user._id, username: user.username});
+      // res.sendStatus(200);
     }
   });
 });
@@ -32,7 +33,8 @@ router.post('/login', (req, res, next) => {
       next(error);
     } else {
       req.session.userId = user._id;
-      res.sendStatus(200);
+      res.json({id: user._id, username: user.username});
+      // res.sendStatus(200);
     }
   });
 });

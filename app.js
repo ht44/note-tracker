@@ -13,6 +13,7 @@ const express = require('express');
 const app = express();
 
 const initRouter = require('./server/api/init');
+const usersRouter = require('./server/api/users');
 const authRouter = require('./server/api/auth');
 const notebookRouter = require('./server/api/notebook');
 
@@ -45,9 +46,10 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(express.static(path.join(__dirname, 'client')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
 
+app.use('/api', authRouter);
+app.use('/api/users', usersRouter);
 app.use('/api/init', initRouter);
 app.use('/api/notebook', notebookRouter);
-app.use('/api', authRouter);
 
 app.get('*', (req, res) => {
   res.sendFile('index.html', {root: path.join(__dirname, 'client')});

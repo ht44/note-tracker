@@ -11,7 +11,11 @@
         method: 'GET',
         url: '/api/init'
       }).then(success => {
+        console.log(success.data);
         this.authenticated = true;
+        this.username = success.data.username;
+        this.id = success.data.id;
+        console.log(this.username);
         console.log(success);
       }, failure => {
         this.authenticated = false;

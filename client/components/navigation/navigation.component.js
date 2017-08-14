@@ -9,6 +9,7 @@
   });
 
   function controller($http, $state, $scope) {
+
     this.logout = () => {
       $http({
         method: 'GET',
@@ -22,8 +23,11 @@
     }
 
     this.failure = response => {
-      console.log(response);
+      $state.go('error', {message: response});
     }
 
+    this.getAccount = () => {
+      $state.go('users', {id: $scope.$parent.$ctrl.id});
+    }
   }
 })();

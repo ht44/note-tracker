@@ -2,6 +2,7 @@
   <ul>
     <li><a ui-sref="home">Home</a></li>
     <li ng-show="$ctrl.authenticated"><a ui-sref="notebook">My Notebook</a></li>
+    <li ng-show="$ctrl.authenticated"><a ng-click="$ctrl.getAccount()" href="">My Account</a></li>
     <li ng-show="$ctrl.authenticated"><a ng-click="$ctrl.logout()" href="">Logout</a></li>
     <li ng-hide="$ctrl.authenticated"><a ui-sref="register">Register</a></li>
     <li ng-hide="$ctrl.authenticated"><a ui-sref="login">Login</a></li>

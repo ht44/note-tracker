@@ -28,6 +28,15 @@
       component: 'login'
     })
     .state({
+      name: 'users',
+      parent: 'app',
+      url: '/users/:id',
+      component: 'account',
+      params: {
+        username: null
+      }
+    })
+    .state({
       name: 'notebook',
       parent: 'app',
       url: '/notebook',
